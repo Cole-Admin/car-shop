@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registracija — CarMarket</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+    <div class="auth-card">
+        <div class="auth-logo">CarMarket</div>
+        <p class="auth-sub">Kreiraj novi nalog</p>
+
+        {% if greska %}
+        <div class="alert alert-error">{{ greska }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <div class="field">
+                <label>Korisničko ime</label>
+                <input name="ime" placeholder="Izaberi korisničko ime" autocomplete="username" required>
+            </div>
+            <div class="field">
+                <label>Lozinka</label>
+                <input name="sifra" type="password" placeholder="••••••••" autocomplete="new-password" required>
+            </div>
+            <div class="field">
+                <label>Početni balans (EUR)</label>
+                <input name="balans" type="number" min="0" placeholder="npr. 20000">
+            </div>
+            <button type="submit">Registruj se</button>
+        </form>
+
+        <a href="/" class="link">Već imaš nalog? <span>Prijavi se</span></a>
+    </div>
+</div>
+
+</body>
+</html>

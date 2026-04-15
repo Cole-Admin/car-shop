@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg:        #0a0a0f;
+    --surface:   #111118;
+    --surface2:  #18181f;
+    --border:    rgba(255,255,255,0.07);
+    --accent:    #e8b86d;
+    --accent2:   #c9974a;
+    --red:       #e05b5b;
+    --green:     #5be0a0;
+    --text:      #f0f0f5;
+    --muted:     #7a7a8a;
+    --radius:    14px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    background-image:
+        radial-gradient(ellipse 60% 40% at 80% 0%, rgba(232,184,109,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 10% 90%, rgba(232,184,109,0.04) 0%, transparent 50%);
+}
+
+/* ── TOPBAR ── */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+}
+
+.topbar-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--accent);
+}
+
+.topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.topbar-user .balans {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.btn-logout {
+    font-size: 13px;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    width: auto;
+    margin: 0;
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.2);
+    transform: none;
+    background: rgba(255,255,255,0.05);
+}
+
+/* ── AUTH PAGES ── */
+.auth-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.auth-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.auth-sub {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 28px;
+}
+
+/* ── FORM ELEMENTS ── */
+.field {
+    margin-bottom: 14px;
+}
+
+.field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+    padding: 11px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: var(--accent);
+}
+
+input::placeholder {
+    color: var(--muted);
+}
+
+/* ── BUTTONS ── */
+button, .btn {
+    display: inline-block;
+    width: 100%;
+    padding: 11px 20px;
+    margin-top: 6px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border: none;
+    border-radius: 10px;
+    color: #0a0a0f;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:hover, .btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.link span {
+    color: var(--accent);
+}
+
+.link:hover {
+    color: var(--accent);
+}
+
+/* ── ALERTS ── */
+.alert {
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.alert-error {
+    background: rgba(224,91,91,0.12);
+    border: 1px solid rgba(224,91,91,0.3);
+    color: #f08080;
+}
+
+.alert-success {
+    background: rgba(91,224,160,0.1);
+    border: 1px solid rgba(91,224,160,0.25);
+    color: #70d9a8;
+}
+
+/* ── MARKET LAYOUT ── */
+.market-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 30px 24px 60px;
+}
+
+/* ── FILTER BAR ── */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: flex-end;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 24px;
+}
+
+.filter-bar .field {
+    flex: 1 1 140px;
+    margin: 0;
+    min-width: 120px;
+}
+
+.filter-bar .field label {
+    font-size: 11px;
+}
+
+.filter-bar input {
+    padding: 9px 12px;
+    font-size: 13px;
+}
+
+.filter-bar button {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 9px 22px;
+    margin: 0;
+    align-self: flex-end;
+    font-size: 13px;
+}
+
+.btn-reset {
+    flex: 0 0 auto;
+    width: auto;
+    padding: 9px 16px;
+    margin: 0;
+    align-self: flex-end;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.btn-reset:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.04);
+}
+
+/* ── REGISTRATION CALC ── */
+.reg-calc {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 13px;
+}
+
+.reg-calc span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+
+.reg-calc input {
+    width: 160px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.reg-calc button {
+    width: auto;
+    padding: 8px 18px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.reg-result {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 14px;
+    margin-left: 4px;
+}
+
+/* ── CAR GRID ── */
+.cars-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.cars-count {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.cars-count span {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.car-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.2s, transform 0.2s;
+    animation: fadeUp 0.35s ease both;
+}
+
+.car-card:hover {
+    border-color: rgba(232,184,109,0.25);
+    transform: translateY(-3px);
+}
+
+.car-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.car-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.car-stat .val {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.car-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 8px;
+}
+
+.car-card .btn-buy {
+    margin-top: 12px;
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0a0a0f;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s;
+}
+
+.car-card .btn-buy:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.car-card .btn-buy.disabled {
+    background: var(--surface2);
+    color: var(--muted);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+}
+
+.empty-state p {
+    font-size: 15px;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    /* Topbar */
+    .topbar {
+        padding: 0 16px;
+        gap: 10px;
+    }
+
+    .topbar-user {
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .topbar-brand {
+        font-size: 18px;
+    }
+
+    /* Auth */
+    .auth-card {
+        padding: 30px 24px;
+    }
+
+    /* Market wrap */
+    .market-wrap {
+        padding: 16px 14px 50px;
+    }
+
+    /* Filter bar - stack vertically */
+    .filter-bar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 16px;
+    }
+
+    .filter-bar .field {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
+
+    .filter-bar input {
+        width: 100%;
+    }
+
+    .filter-bar button,
+    .btn-reset {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Reg calc - stack */
+    .reg-calc {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 14px 16px;
+    }
+
+    .reg-calc input {
+        width: 100%;
+    }
+
+    .reg-calc button {
+        width: 100%;
+    }
+
+    .reg-result {
+        text-align: center;
+    }
+
+    /* Car grid - single column */
+    .car-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar-user .balans {
+        font-size: 13px;
+    }
+
+    .auth-card {
+        padding: 26px 18px;
+    }
+
+    .auth-logo {
+        font-size: 26px;
+    }
+
+    .car-grid {
+        grid-template-columns: 1fr;
+    }
+}

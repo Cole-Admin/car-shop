@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market — CarMarket</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+    <div class="topbar-brand">CarMarket</div>
+    <div class="topbar-user">
+        <span>👤 {{ ime }}</span>
+        <span class="balans">💰 {{ "{:,}".format(balans) }} €</span>
+        <form action="/logout" method="GET" style="margin:0;">
+            <button class="btn-logout" type="submit">Odjavi se</button>
+        </form>
+    </div>
+</header>
+
+<div class="market-wrap">
+
+    <!-- PORUKA -->
+    {% if poruka %}
+    <div class="alert alert-{{ 'success' if poruka[0] == 'uspeh' else 'error' }}" style="margin-bottom:20px;">
+        {{ poruka[1] }}
+    </div>
+    {% endif %}
+
+    <!-- FILTERI -->
+    <form method="POST" class="filter-bar">
+        <div class="field">
+            <label>Pretraga</label>
+            <input name="search" placeholder="Marka ili model" value="{{ filters.search }}">
+        </div>
+        <div class="field">
+            <label>Min. cena (€)</label>
+            <input name="min_cena" type="number" min="0" placeholder="npr. 10000" value="{{ filters.min_cena }}">
+        </div>
+        <div class="field">
+            <label>Max. cena (€)</label>
+            <input name="max_cena" type="number" min="0" placeholder="npr. 50000" value="{{ filters.max_cena }}">
+        </div>
+        <div class="field">
+            <label>Min. godište</label>
+            <input name="min_god" type="number" placeholder="npr. 2018" value="{{ filters.min_god }}">
+        </div>
+        <div class="field">
+            <label>Min. snaga (HP)</label>
+            <input name="min_snaga" type="number" placeholder="npr. 150" value="{{ filters.min_snaga }}">
+        </div>
+        <button type="submit">Filtriraj</button>
+        <a href="/market" class="btn btn-reset">Resetuj</a>
+    </form>
+
+    <!-- KALKULATOR REGISTRACIJE -->
+    <div class="reg-calc">
+        <span>🧮 Kalkulator registracije</span>
+        <input id="snaga-input" type="number" min="0" placeholder="Snaga motora (HP)">
+        <button type="button" onclick="izracunajRegistraciju()">Izračunaj</button>
+        <span class="reg-result" id="reg-rezultat"></span>
+    </div>
+
+    <!-- GRID -->
+    <div class="cars-header">
+        <div class="cars-count">Prikazano: <span>{{ auti | length }}</span> automobila</div>
+    </div>
+
+    <div class="car-grid">
+        {% for a in auti %}
+        <div class="car-card" style="animation-delay: {{ loop.index0 * 0.03 }}s">
+            <div class="car-name">{{ a.marka }} {{ a.model }}</div>
+
+            <div class="car-stat">
+                <span>📅</span>
+                <span>Godište</span>
+                <span class="val">{{ a.godiste }}</span>
+            </div>
+            <div class="car-stat">
+                <span>💪</span>
+                <span>Snaga</span>
+                <span class="val">{{ a.snaga }} HP</span>
+            </div>
+            <div class="car-stat">
+                <span>⚡</span>
+                <span>Max brzina</span>
+                <span class="val">{{ a.brzina }} km/h</span>
+            </div>
+
+            <div class="car-price">{{ "{:,}".format(a.cena) }} €</div>
+
+            {% if balans >= a.cena %}
+                <a href="/kupi/{{ a.id }}" class="btn-buy">Kupi</a>
+            {% else %}
+                <span class="btn-buy disabled">Nedovoljno sredstava</span>
+            {% endif %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>Nema automobila koji odgovaraju filterima.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script>
+function izracunajRegistraciju() {
+    const snaga = document.getElementById("snaga-input").value;
+    if (!snaga) return;
+
+    fetch("/registracija?snaga=" + snaga)
+        .then(r => r.text())
+        .then(data => {
+            document.getElementById("reg-rezultat").textContent = "→ " + data;
+        });
+}
+
+document.getElementById("snaga-input").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") izracunajRegistraciju();
+});
+</script>
+
+</body>
+</html>

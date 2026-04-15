@@ -1,0 +1,17 @@
+marko:12345:20000
+ana:abcd:20000
+jovan:qwerty:20000
+ivana:pass123:20000
+petar:98765:20000
+milica:hello123:20000
+nikola:admin2024:20000
+sofija:sofija321:20000
+luka:luka2020:20000
+marija:marija999:20000
+cole:cole1234:1986000
+Danilo:cole789:20000
+Marko:mare098:70000
+Perica:perica123:89000
+Janko:janko9:70000
+rasa:rasa7:70000
+jana:jana2:52000
